@@ -9,16 +9,24 @@ import ImageModal from './ImageModal/ImageModal';
 
 import getGallerySearch from '../unsplash-api';
 
+type Images = {
+  [key: string]: unknown;
+};
+type Error = boolean | undefined;
+type ImageItem = {
+  [key: string]: string;
+};
+
 function App() {
-  const [images, setImages] = useState([]);
-  const [topicValue, setTopic] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState([false, undefined]);
-  const [loadMore, setLoadMore] = useState(false);
-  const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [imageItem, setImageValue] = useState([]);
+  const [images, setImages] = useState<Images[]>([]);
+  const [topicValue, setTopic] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error[]>([false, undefined]);
+  const [loadMore, setLoadMore] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [imageItem, setImageValue] = useState<ImageItem[]>([]);
 
   useEffect(() => {
     if (images.length > 0) {
@@ -59,7 +67,7 @@ function App() {
     fetchData();
   }, [page, topicValue]);
 
-  const handleSearch = topic => {
+  const handleSearch = (topic: string) => {
     setTopic(topic);
     setImages([]);
     setError([false, undefined]);
