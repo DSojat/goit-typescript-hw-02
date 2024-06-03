@@ -1,9 +1,16 @@
 import Modal from 'react-modal';
+import { ImageItem } from '../App.types';
 
 // Make sure to bind modal to your AppElement
 Modal.setAppElement('#root');
 
-const ImageModal = ({ modalIsOpen, setIsOpen, item }) => {
+type Props = {
+  modalIsOpen: boolean;
+  setIsOpen: boolean;
+  item: ImageItem;
+};
+
+const ImageModal = ({ modalIsOpen, setIsOpen, item }: Props) => {
   const src = item.regular;
   const description = item.description;
   const alt = item.alt;
@@ -25,7 +32,7 @@ const ImageModal = ({ modalIsOpen, setIsOpen, item }) => {
     },
   };
 
-  let subtitle;
+  let subtitle: any;
 
   function openModal() {
     setIsOpen(true);

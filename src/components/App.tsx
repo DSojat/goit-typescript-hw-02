@@ -9,24 +9,18 @@ import ImageModal from './ImageModal/ImageModal';
 
 import getGallerySearch from '../unsplash-api';
 
-type Images = {
-  [key: string]: unknown;
-};
-type Error = boolean | undefined;
-type ImageItem = {
-  [key: string]: string;
-};
+import { Images, ErrorType, ImageItem } from './App.types';
 
 function App() {
   const [images, setImages] = useState<Images[]>([]);
   const [topicValue, setTopic] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error[]>([false, undefined]);
+  const [error, setError] = useState<ErrorType[]>([false, undefined]);
   const [loadMore, setLoadMore] = useState<boolean>(false);
   const [page, setPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [modalIsOpen, setIsOpen] = useState<boolean>(false);
-  const [imageItem, setImageValue] = useState<ImageItem[]>([]);
+  const [imageItem, setImageValue] = useState<ImageItem>({});
 
   useEffect(() => {
     if (images.length > 0) {
@@ -57,8 +51,9 @@ function App() {
         } else {
           setImages([...images, ...data.results]);
         }
-      } catch (error) {
-        setError([true, error.message]);
+      } catch (error: any) {
+        const errMessage: string = error.message;
+        setError([true, errMessage]);
         loadMore && setLoadMore(false);
       } finally {
         setLoading(false);
@@ -79,7 +74,10 @@ function App() {
     setPage(page + 1);
   };
 
-  const handleImageView = (evt, values) => {
+  const handleImageView = (
+    evt: React.MouseEvent<HTMLDivElement>,
+    values: ImageItem
+  ) => {
     evt.preventDefault();
     setImageValue(values);
     setIsOpen(true);

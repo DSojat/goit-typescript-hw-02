@@ -1,6 +1,12 @@
 import css from './ImageCard.module.css';
+import { ImageItem } from '../App.types';
 
-const ImageCard = ({ onClick, values }) => {
+type Props = {
+  values: ImageItem;
+  onClick: (evt: React.MouseEvent<HTMLDivElement>, values: ImageItem) => void;
+};
+
+const ImageCard = ({ onClick, values }: Props) => {
   return (
     <div className={css.imgBox}>
       <img

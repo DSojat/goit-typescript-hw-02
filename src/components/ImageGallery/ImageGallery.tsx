@@ -1,7 +1,17 @@
 import ImageCard from '../ImageCard/ImageCard';
 import css from './ImageGallery.module.css';
 
-const ImageGallery = ({ items, handleClick }) => {
+import { Images, ImageItem } from '../App.types';
+
+type Props = {
+  items: Images[];
+  handleClick: (
+    evt: React.MouseEvent<HTMLDivElement>,
+    values: ImageItem
+  ) => void;
+};
+
+const ImageGallery = ({ items, handleClick }: Props) => {
   return (
     <ul className={css.galleryList}>
       {items.map(
