@@ -1,12 +1,13 @@
 import Modal from 'react-modal';
 import { ImageItem } from '../App.types';
+import { Dispatch, SetStateAction } from 'react';
 
 // Make sure to bind modal to your AppElement
 Modal.setAppElement('#root');
 
 type Props = {
   modalIsOpen: boolean;
-  setIsOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
   item: ImageItem;
 };
 

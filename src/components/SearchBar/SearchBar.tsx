@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { FormEvent, ChangeEventHandler } from 'react';
 import toast, { Toaster, resolveValue } from 'react-hot-toast';
 import css from './SearchBar.module.css';
 
