@@ -10,7 +10,8 @@ const SearchBar = ({ onSubmit }: Props) => {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const form = evt.currentTarget;
-    const topic: string = form.elements.topic.value.trim().toLowerCase();
+    const { topicInput }: any = form.elements;
+    const topic: string = topicInput.value.trim().toLowerCase();
 
     if (topic === '') {
       toast.error('Please enter search term!');
@@ -30,7 +31,7 @@ const SearchBar = ({ onSubmit }: Props) => {
           type="text"
           autoComplete="off"
           autoFocus
-          name="topic"
+          name="topicInput"
           placeholder="Search images and photos"
         />
         <button className={css.button} type="submit">
