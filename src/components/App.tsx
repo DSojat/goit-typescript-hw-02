@@ -41,15 +41,21 @@ function App() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getGallerySearch(topicValue, page);
-        if (data.results.length === 0) {
+        const {
+          results,
+          total_pages,
+        }: { results: Images[]; total_pages: number } = await getGallerySearch(
+          topicValue,
+          page
+        );
+        if (results.length === 0) {
           throw new Error('No results found');
         }
         if (page === 1) {
-          setTotalPages(data.total_pages);
-          setImages(data.results);
+          setTotalPages(total_pages);
+          setImages(results);
         } else {
-          setImages([...images, ...data.results]);
+          setImages([...images, ...results]);
         }
       } catch (error: any) {
         const errMessage: string = error.message;
